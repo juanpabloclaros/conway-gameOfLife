@@ -10,7 +10,11 @@ describe("Game of life", () => {
         log: vi.fn()
     }
     const stateImporter: StateImporter = {
-        read: () => new Board()
+        read: () => new Board([
+          [false, false, false],
+          [false, true, false],
+          [false, false, false]
+      ])
     }
     const game = new GameOfLife(logger,stateImporter)
 

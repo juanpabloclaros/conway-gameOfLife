@@ -29,4 +29,16 @@ describe("Board", () => {
 +++
 +++`)
   })
+
+  it("keeps dead cells when all dead", () => {
+    const board = new Board([
+        [false, false, false],
+        [false, false, false],
+        [false, false, false]
+    ])
+
+    const nextBoard = board.nextGeneration()
+
+    expect(nextBoard).toEqual(board)
+  })
 })

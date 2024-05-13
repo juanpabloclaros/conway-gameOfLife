@@ -12,6 +12,7 @@ export class GameOfLife {
   }
   tick() {
     // TODO
+    this.board = this.board.nextGeneration()
     this.logger.log(this.board.toString())
   }
 }
