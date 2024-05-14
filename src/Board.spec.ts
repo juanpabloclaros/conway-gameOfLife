@@ -4,9 +4,9 @@ import { Board } from "./Board.js"
 describe("Board", () => {
   it("print dead cells", () => {
     const board = new Board([
-        [false, false, false],
-        [false, false, false],
-        [false, false, false]
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
     ])
 
     const result = board.toString()
@@ -18,9 +18,9 @@ describe("Board", () => {
 
   it("print alive cells", () => {
     const board = new Board([
-        [true, true, true],
-        [true, true, true],
-        [true, true, true]
+      [true, true, true],
+      [true, true, true],
+      [true, true, true],
     ])
 
     const result = board.toString()
@@ -32,9 +32,9 @@ describe("Board", () => {
 
   it("keeps dead cells when all dead", () => {
     const board = new Board([
-        [false, false, false],
-        [false, false, false],
-        [false, false, false]
+      [false, false, false],
+      [false, false, false],
+      [false, false, false],
     ])
 
     const nextBoard = board.nextGeneration()
@@ -44,15 +44,15 @@ describe("Board", () => {
 
   it("kills a cell if there are no neighbors", () => {
     const board = new Board([
-        [false, false, false],
-        [false, true, false],
-        [false, false, false]
+      [false, false, false],
+      [false, true, false],
+      [false, false, false],
     ])
 
     const expectedBoard = new Board([
       [false, false, false],
       [false, false, false],
-      [false, false, false]
+      [false, false, false],
     ])
 
     const nextBoard = board.nextGeneration()
@@ -60,4 +60,3 @@ describe("Board", () => {
     expect(nextBoard).toEqual(expectedBoard)
   })
 })
-
