@@ -41,4 +41,23 @@ describe("Board", () => {
 
     expect(nextBoard).toEqual(board)
   })
+
+  it("kills a cell if there are no neighbors", () => {
+    const board = new Board([
+        [false, false, false],
+        [false, true, false],
+        [false, false, false]
+    ])
+
+    const expectedBoard = new Board([
+      [false, false, false],
+      [false, false, false],
+      [false, false, false]
+    ])
+
+    const nextBoard = board.nextGeneration()
+
+    expect(nextBoard).toEqual(expectedBoard)
+  })
 })
+
