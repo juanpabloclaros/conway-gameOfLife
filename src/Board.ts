@@ -12,15 +12,15 @@ export class Board {
       .join("\n")
   }
   nextGeneration(): Board {
-    const newCells = this.cells.map((row, i) => row.map((cell, j) => cell && this.getNextGeneration(i, j)))
+    const newCells = this.cells.map((row, i) => row.map((cell, j) => this.getNextGeneration(i, j, cell)))
     return new Board(newCells)
   }
 
-  getNextGeneration(i: number, j: number) {
+  getNextGeneration(i: number, j: number, cell: boolean) {
     const neighbors = this.getNeighbors(i, j)
 
-    const isAlive = neighbors.filter(Boolean).length === 2
-    return isAlive
+    const aliveNeighbors = neighbors.filter(Boolean).length === 2
+    return aliveNeighbors && cell
   }
 
   getNeighbors(row: number, column: number) {
