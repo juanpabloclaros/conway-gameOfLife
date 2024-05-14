@@ -12,7 +12,28 @@ export class Board {
       .join("\n")
   }
   nextGeneration(): Board {
-    const newCells = this.cells.map((row) => row.map((cell) => false))
+    const newCells = this.cells.map((row, i) => row.map((cell, j) => this.getNextGeneration(i, j)))
     return new Board(newCells)
+  }
+
+  getNextGeneration(i: number, j: number) {
+    return false
+  }
+
+  getNeighbors(row: number, column: number) {
+    const neighbors = []
+
+    for (let i = row - 1; i <= row + 1; i++) {
+      for (let j = column - 1; j <= column + 1; j++) {
+        if (row === i && column === j) {
+          continue
+        }
+        const rowOfCells = this.cells[i] ?? []
+        const cell = rowOfCells[j] ?? false
+        neighbors.push(cell)
+      }
+    }
+
+    return neighbors
   }
 }
