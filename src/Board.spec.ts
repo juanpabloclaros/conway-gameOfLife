@@ -60,7 +60,7 @@ describe("Board", () => {
     expect(nextBoard).toEqual(expectedBoard)
   })
 
-  it.skip("cells remain alive if there are two neighbors", () => {
+  it("cells remain alive if there are two neighbors", () => {
     const board = new Board([
       [true, false, false],
       [true, true, false],
