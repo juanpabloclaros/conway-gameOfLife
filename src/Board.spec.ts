@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
-import { Board, Coordinates } from "./Board.js"
+import { Board } from "./Board.js"
+import { Coordinates } from "./Coordinates.js"
 
 describe("Board", () => {
   it("print dead cells", () => {
