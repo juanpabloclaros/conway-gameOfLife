@@ -1,3 +1,21 @@
+class Coordinates {
+  constructor(
+    private readonly i: number,
+    private readonly j: number,
+  ) {}
+
+  static at(i: number, j: number) {
+    return new Coordinates(i, j)
+  }
+
+  getI() {
+    return this.i
+  }
+  getJ() {
+    return this.j
+  }
+}
+
 export class Board {
   private readonly cells: boolean[][]
   constructor(cells: Array<Array<boolean>>) {

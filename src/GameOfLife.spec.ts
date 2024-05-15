@@ -21,8 +21,6 @@ describe("Game of life", () => {
 
     game.tick()
 
-    expect(logger.log).toHaveBeenCalledWith(`
-
-   `)
+    expect(logger.log).toHaveBeenCalledWith("   \n   \n   ")
   })
 })
