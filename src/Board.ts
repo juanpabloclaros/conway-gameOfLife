@@ -40,11 +40,12 @@ export class Board {
   }
 
   getNeighbors(row: number, column: number) {
+    const coordinates = Coordinates.at(row, column)
     const neighbors = []
 
-    for (let i = row - 1; i <= row + 1; i++) {
-      for (let j = column - 1; j <= column + 1; j++) {
-        if (row === i && column === j) {
+    for (let i = coordinates.getI() - 1; i <= coordinates.getI() + 1; i++) {
+      for (let j = coordinates.getJ() - 1; j <= coordinates.getJ() + 1; j++) {
+        if (coordinates.getI() === i && coordinates.getJ() === j) {
           continue
         }
         const rowOfCells = this.cells[i] ?? []
