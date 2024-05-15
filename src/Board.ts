@@ -40,7 +40,10 @@ export class Board {
   }
 
   getNeighbors(row: number, column: number) {
-    const coordinates = Coordinates.at(row, column)
+    return this.getNeighbors2(Coordinates.at(row, column))
+  }
+
+  private getNeighbors2(coordinates: Coordinates) {
     const neighbors = []
 
     for (let i = coordinates.getI() - 1; i <= coordinates.getI() + 1; i++) {
