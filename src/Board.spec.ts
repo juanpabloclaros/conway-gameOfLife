@@ -80,7 +80,7 @@ describe("Board", () => {
 
     const neighbors = board.getNeighbors(Coordinates.at(1, 1))
 
-    const alivesNeighbors = neighbors.filter(Boolean)
+    const alivesNeighbors = neighbors.filter((cell) => cell.isAlive)
 
     expect(alivesNeighbors).toHaveLength(2)
   })
@@ -106,7 +106,7 @@ describe("Board", () => {
 
     const neighbors = board.getNeighbors(Coordinates.at(2, 2))
 
-    const alivesNeighbors = neighbors.filter(Boolean)
+    const alivesNeighbors = neighbors.filter((cell) => cell.isAlive)
 
     expect(alivesNeighbors).toHaveLength(1)
   })

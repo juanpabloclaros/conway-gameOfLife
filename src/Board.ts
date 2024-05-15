@@ -9,20 +9,20 @@ class Cell {
   }
 }
 export class Board {
-  private readonly cells: boolean[][]
+  private readonly cells: Cell[][]
   constructor(cells: Array<Array<boolean>>) {
-    this.cells = cells
+    this.cells = cells.map((row) => row.map((cell) => new Cell(cell)))
   }
 
   nextGeneration(): Board {
     const newCells = this.cells.map((row, i) =>
-      row.map((cell, j) => this.getNextGeneration(Coordinates.at(i, j), new Cell(cell))),
+      row.map((cell, j) => this.getNextGeneration(Coordinates.at(i, j), cell)),
     )
     return new Board(newCells)
   }
 
   private getNextGeneration(coordinates: Coordinates, cell: Cell) {
-    const neighbors = this.getNeighbors(coordinates).map((cell) => new Cell(cell))
+    const neighbors = this.getNeighbors(coordinates)
     return cell.nextGeneration(neighbors).isAlive
   }
 
@@ -31,12 +31,12 @@ export class Board {
   }
 
   private getCellAt(neighborsCoordinate: Coordinates) {
-    return neighborsCoordinate.extractFrom(this.cells) ?? false
+    return neighborsCoordinate.extractFrom(this.cells) ?? new Cell(false)
   }
 
   toString() {
     return this.cells
-      .map((row) => row.map((cell) => (cell ? "+" : " ")))
+      .map((row) => row.map((cell) => (cell.isAlive ? "+" : " ")))
       .map((row) => row.join(""))
       .join("\n")
   }
