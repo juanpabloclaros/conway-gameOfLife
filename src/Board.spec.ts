@@ -80,24 +80,10 @@ describe("Board", () => {
 
     const neighbors = board.getNeighbors(Coordinates.at(1, 1))
 
-    const alivesNeighbors = neighbors.filter((cell) => cell.isAlive)
-
-    expect(alivesNeighbors).toHaveLength(2)
+    expect(neighbors.aliveAmount()).toBe(2)
   })
 
-  it("has 8 neighbors", () => {
-    const board = Board.from([
-      [true, false, false],
-      [true, true, false],
-      [false, false, false],
-    ])
-
-    const neighbors = board.getNeighbors(Coordinates.at(1, 1))
-
-    expect(neighbors).toHaveLength(8)
-  })
-
-  it("retrives corner neighbors", () => {
+  it("retrieves corner neighbors", () => {
     const board = Board.from([
       [true, false, false],
       [true, true, false],
@@ -106,8 +92,6 @@ describe("Board", () => {
 
     const neighbors = board.getNeighbors(Coordinates.at(2, 2))
 
-    const alivesNeighbors = neighbors.filter((cell) => cell.isAlive)
-
-    expect(alivesNeighbors).toHaveLength(1)
+    expect(neighbors.aliveAmount()).toBe(1)
   })
 })

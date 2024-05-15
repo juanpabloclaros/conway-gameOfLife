@@ -1,3 +1,5 @@
+import { Neighbors } from "./Neighbors.js"
+
 export class Cell {
   public static dead() {
     return this.create(false)
@@ -7,10 +9,18 @@ export class Cell {
     return new Cell(alive)
   }
 
-  private constructor(readonly isAlive: boolean) {}
+  private constructor(private readonly alive: boolean) {}
 
-  nextGeneration(neighbors: Cell[]): Cell {
-    const hasTwoAliveNeighbors = neighbors.filter((cell) => cell.isAlive).length === 2
-    return new Cell(hasTwoAliveNeighbors && this.isAlive)
+  isAlive() {
+    return this.alive
+  }
+
+  nextGeneration(neighbors: Neighbors): Cell {
+    const hasTwoAliveNeighbors = neighbors.aliveAmount() === 2
+    return new Cell(hasTwoAliveNeighbors && this.alive)
+  }
+
+  toString() {
+    return this.alive ? "+" : " "
   }
 }

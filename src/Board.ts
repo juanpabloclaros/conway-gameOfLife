@@ -1,5 +1,6 @@
 import { Coordinates } from "./Coordinates.js"
 import { Cell } from "./Cell.js"
+import { Neighbors } from "./Neighbors.js"
 
 export class Board {
   private readonly cells: Cell[][]
@@ -25,7 +26,7 @@ export class Board {
   }
 
   getNeighbors(coordinates: Coordinates) {
-    return coordinates.getNeighbors().map((coordinate) => this.getCellAt(coordinate))
+    return new Neighbors(coordinates.getNeighbors().map((coordinate) => this.getCellAt(coordinate)))
   }
 
   private getCellAt(neighborsCoordinate: Coordinates) {
@@ -33,9 +34,6 @@ export class Board {
   }
 
   toString() {
-    return this.cells
-      .map((row) => row.map((cell) => (cell.isAlive ? "+" : " ")))
-      .map((row) => row.join(""))
-      .join("\n")
+    return this.cells.map((row) => row.join("")).join("\n")
   }
 }
