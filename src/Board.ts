@@ -31,6 +31,16 @@ export class Coordinates {
 
     return neighborsCoordinates
   }
+
+  extractFrom<T>(elements: Array<Array<T>>): T | undefined {
+    const row = elements[this.getI()]
+
+    if (!row) {
+      return undefined
+    }
+
+    return row[this.getJ()]
+  }
 }
 
 export class Board {
@@ -55,13 +65,7 @@ export class Board {
   }
 
   private getCellAt(neighborsCoordinate: Coordinates) {
-    const row = this.cells[neighborsCoordinate.getI()]
-
-    if (!row) {
-      return false
-    }
-
-    return row[neighborsCoordinate.getJ()] ?? false
+    return neighborsCoordinate.extractFrom(this.cells) ?? false
   }
 
   toString() {
