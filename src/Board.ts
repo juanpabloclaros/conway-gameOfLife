@@ -1,5 +1,3 @@
-import { join } from "path"
-
 export class Board {
   private readonly cells: boolean[][]
   constructor(cells: Array<Array<boolean>>) {
