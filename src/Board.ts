@@ -1,18 +1,23 @@
 import { Coordinates } from "./Coordinates.js"
 
 class Cell {
-  constructor(readonly isAlive: boolean) {}
+  public static create(alive: boolean): Cell {
+    return new Cell(alive)
+  }
+
+  private constructor(readonly isAlive: boolean) {}
 
   nextGeneration(neighbors: Cell[]): Cell {
     const hasTwoAliveNeighbors = neighbors.filter((cell) => cell.isAlive).length === 2
     return new Cell(hasTwoAliveNeighbors && this.isAlive)
   }
 }
+
 export class Board {
   private readonly cells: Cell[][]
 
   static from(cells: Array<Array<boolean>>) {
-    return new Board(cells.map((row) => row.map((cell) => new Cell(cell))))
+    return new Board(cells.map((row) => row.map((cell) => Cell.create(cell))))
   }
 
   private constructor(cells: Array<Array<Cell>>) {
@@ -36,7 +41,7 @@ export class Board {
   }
 
   private getCellAt(neighborsCoordinate: Coordinates) {
-    return neighborsCoordinate.extractFrom(this.cells) ?? new Cell(false)
+    return neighborsCoordinate.extractFrom(this.cells) ?? Cell.create(false)
   }
 
   toString() {
