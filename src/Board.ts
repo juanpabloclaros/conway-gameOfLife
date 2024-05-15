@@ -1,5 +1,13 @@
 import { Coordinates } from "./Coordinates.js"
 
+class Cell {
+  constructor(readonly isAlive: boolean) {}
+
+  nextGeneration(neighbors: Cell[]): Cell {
+    const hasTwoAliveNeighbors = neighbors.filter((cell) => cell.isAlive).length === 2
+    return new Cell(hasTwoAliveNeighbors && this.isAlive)
+  }
+}
 export class Board {
   private readonly cells: boolean[][]
   constructor(cells: Array<Array<boolean>>) {
@@ -8,15 +16,14 @@ export class Board {
 
   nextGeneration(): Board {
     const newCells = this.cells.map((row, i) =>
-      row.map((cell, j) => this.getNextGeneration(Coordinates.at(i, j), cell)),
+      row.map((cell, j) => this.getNextGeneration(Coordinates.at(i, j), new Cell(cell))),
     )
     return new Board(newCells)
   }
 
-  private getNextGeneration(coordinates: Coordinates, cell: boolean) {
-    const neighbors = this.getNeighbors(coordinates)
-    const hasTwoAliveNeighbors = neighbors.filter(Boolean).length === 2
-    return hasTwoAliveNeighbors && cell
+  private getNextGeneration(coordinates: Coordinates, cell: Cell) {
+    const neighbors = this.getNeighbors(coordinates).map((cell) => new Cell(cell))
+    return cell.nextGeneration(neighbors).isAlive
   }
 
   getNeighbors(coordinates: Coordinates) {
