@@ -10,8 +10,13 @@ class Cell {
 }
 export class Board {
   private readonly cells: Cell[][]
-  constructor(cells: Array<Array<boolean>>) {
-    this.cells = cells.map((row) => row.map((cell) => new Cell(cell)))
+
+  static from(cells: Array<Array<boolean>>) {
+    return new Board(cells.map((row) => row.map((cell) => new Cell(cell))))
+  }
+
+  private constructor(cells: Array<Array<Cell>>) {
+    this.cells = cells
   }
 
   nextGeneration(): Board {
@@ -23,7 +28,7 @@ export class Board {
 
   private getNextGeneration(coordinates: Coordinates, cell: Cell) {
     const neighbors = this.getNeighbors(coordinates)
-    return cell.nextGeneration(neighbors).isAlive
+    return cell.nextGeneration(neighbors)
   }
 
   getNeighbors(coordinates: Coordinates) {

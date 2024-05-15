@@ -11,7 +11,7 @@ describe("Game of life", () => {
     }
     const stateImporter: StateImporter = {
       read: () =>
-        new Board([
+        Board.from([
           [false, false, false],
           [false, true, false],
           [false, false, false],

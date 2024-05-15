@@ -4,7 +4,7 @@ import { Coordinates } from "./Coordinates.js"
 
 describe("Board", () => {
   it("print dead cells", () => {
-    const board = new Board([
+    const board = Board.from([
       [false, false, false],
       [false, false, false],
       [false, false, false],
@@ -16,7 +16,7 @@ describe("Board", () => {
   })
 
   it("print alive cells", () => {
-    const board = new Board([
+    const board = Board.from([
       [true, true, true],
       [true, true, true],
       [true, true, true],
@@ -30,7 +30,7 @@ describe("Board", () => {
   })
 
   it("keeps dead cells when all dead", () => {
-    const board = new Board([
+    const board = Board.from([
       [false, false, false],
       [false, false, false],
       [false, false, false],
@@ -42,13 +42,13 @@ describe("Board", () => {
   })
 
   it("kills a cell if there are no neighbors", () => {
-    const board = new Board([
+    const board = Board.from([
       [false, false, false],
       [false, true, false],
       [false, false, false],
     ])
 
-    const expectedBoard = new Board([
+    const expectedBoard = Board.from([
       [false, false, false],
       [false, false, false],
       [false, false, false],
@@ -60,7 +60,7 @@ describe("Board", () => {
   })
 
   it("cells remain alive if there are two neighbors", () => {
-    const board = new Board([
+    const board = Board.from([
       [true, false, false],
       [true, true, false],
       [false, false, false],
@@ -72,7 +72,7 @@ describe("Board", () => {
   })
 
   it("gets the neighbors", () => {
-    const board = new Board([
+    const board = Board.from([
       [true, false, false],
       [true, true, false],
       [false, false, false],
@@ -86,7 +86,7 @@ describe("Board", () => {
   })
 
   it("has 8 neighbors", () => {
-    const board = new Board([
+    const board = Board.from([
       [true, false, false],
       [true, true, false],
       [false, false, false],
@@ -98,7 +98,7 @@ describe("Board", () => {
   })
 
   it("retrives corner neighbors", () => {
-    const board = new Board([
+    const board = Board.from([
       [true, false, false],
       [true, true, false],
       [false, false, false],
