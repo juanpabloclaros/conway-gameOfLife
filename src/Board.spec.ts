@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from "vitest"
-import { Board } from "./Board.js"
+import { describe, expect, it } from "vitest"
+import { Board, Coordinates } from "./Board.js"
 
 describe("Board", () => {
   it("print dead cells", () => {
@@ -77,7 +77,7 @@ describe("Board", () => {
       [false, false, false],
     ])
 
-    const neighbors = board.getNeighbors(1, 1)
+    const neighbors = board.getNeighbors(Coordinates.at(1, 1))
 
     const alivesNeighbors = neighbors.filter(Boolean)
 
@@ -91,7 +91,7 @@ describe("Board", () => {
       [false, false, false],
     ])
 
-    const neighbors = board.getNeighbors(1, 1)
+    const neighbors = board.getNeighbors(Coordinates.at(1, 1))
 
     expect(neighbors).toHaveLength(8)
   })
@@ -103,7 +103,7 @@ describe("Board", () => {
       [false, false, false],
     ])
 
-    const neighbors = board.getNeighbors(2, 2)
+    const neighbors = board.getNeighbors(Coordinates.at(2, 2))
 
     const alivesNeighbors = neighbors.filter(Boolean)
 

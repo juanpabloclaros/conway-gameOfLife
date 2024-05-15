@@ -1,4 +1,4 @@
-class Coordinates {
+export class Coordinates {
   constructor(
     private readonly i: number,
     private readonly j: number,
@@ -33,28 +33,29 @@ export class Board {
   }
 
   getNextGeneration(i: number, j: number, cell: boolean) {
-    const neighbors = this.getNeighbors(i, j)
+    const neighbors = this.getNeighbors(Coordinates.at(i, j))
 
     const aliveNeighbors = neighbors.filter(Boolean).length === 2
     return aliveNeighbors && cell
   }
 
-  getNeighbors(row: number, column: number) {
-    return this.getNeighbors2(Coordinates.at(row, column))
-  }
-
-  private getNeighbors2(coordinates: Coordinates) {
+  getNeighbors(coordinates: Coordinates) {
     const neighbors = []
+    const neighborsCoordinates: Coordinates[] = []
 
     for (let i = coordinates.getI() - 1; i <= coordinates.getI() + 1; i++) {
       for (let j = coordinates.getJ() - 1; j <= coordinates.getJ() + 1; j++) {
         if (coordinates.getI() === i && coordinates.getJ() === j) {
           continue
         }
-        const rowOfCells = this.cells[i] ?? []
-        const cell = rowOfCells[j] ?? false
-        neighbors.push(cell)
+        neighborsCoordinates.push(Coordinates.at(i, j))
       }
+    }
+
+    for (const neighborsCoordinate of neighborsCoordinates) {
+      const rowOfCells = this.cells[neighborsCoordinate.getI()] ?? []
+      const cell = rowOfCells[neighborsCoordinate.getJ()] ?? false
+      neighbors.push(cell)
     }
 
     return neighbors
