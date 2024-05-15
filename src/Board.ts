@@ -1,17 +1,5 @@
 import { Coordinates } from "./Coordinates.js"
-
-class Cell {
-  public static create(alive: boolean): Cell {
-    return new Cell(alive)
-  }
-
-  private constructor(readonly isAlive: boolean) {}
-
-  nextGeneration(neighbors: Cell[]): Cell {
-    const hasTwoAliveNeighbors = neighbors.filter((cell) => cell.isAlive).length === 2
-    return new Cell(hasTwoAliveNeighbors && this.isAlive)
-  }
-}
+import { Cell } from "./Cell.js"
 
 export class Board {
   private readonly cells: Cell[][]
@@ -41,7 +29,7 @@ export class Board {
   }
 
   private getCellAt(neighborsCoordinate: Coordinates) {
-    return neighborsCoordinate.extractFrom(this.cells) ?? Cell.create(false)
+    return neighborsCoordinate.extractFrom(this.cells) ?? Cell.dead()
   }
 
   toString() {
