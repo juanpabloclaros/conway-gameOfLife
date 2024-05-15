@@ -11,8 +11,8 @@ describe("Board", () => {
 
     const result = board.toString()
 
-    expect(result).toEqual(`   
-   
+    expect(result).toEqual(`
+
    `)
   })
 
